@@ -1,11 +1,12 @@
 # Clustering_DBSCAN
 
 ## Run
-> .../Clustering_DBSCAN> python clustering.py (input data) (# of clusters) (Eps) (MinPts)
+Execute the program with four arguments: **input data file name, n, Eps and MinPts**  
+
 ```
 python clustering.py input3.txt 4 5 5
 ```
-Execute the program with four arguments: **input data file name, n, Eps and MinPts**  
+> .../Clustering_DBSCAN> python clustering.py (input data) (# of clusters) (Eps) (MinPts)
 
 ### recommended values for parameter (n, eps, MinPts)
 - (input 1) n=8, Eps=15, MinPts=22
