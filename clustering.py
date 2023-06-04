@@ -58,36 +58,36 @@ def range_query(datapoint_2dlist,point_p,input_Eps):
 def clustering(datapoint_2dlist, input_Eps, input_MinPts):
     prev_cluster_count = -1
     for p in range(len(datapoint_2dlist)): # Iterate over every point
-        print("p - ", p)
+        #print("p - ", p)
         if datapoint_2dlist[p][3]!=-1: # Skip processed points
-            print("CONTINUE 1")
+            #print("CONTINUE 1")
             continue
         # Find initial neighbors
         neighbors = range_query(copy.deepcopy(datapoint_2dlist),datapoint_2dlist[p],input_Eps)
         if len(neighbors) < input_MinPts:
             datapoint_2dlist[p][3] = -2 # Noise로 우선 분류
-            print("CONTINUE 2")
+            #print("CONTINUE 2")
             continue
         prev_cluster_count += 1
         datapoint_2dlist[p][3] = prev_cluster_count # Start a new cluster
         seed_set = neighbors
         q_count = 0
-        print("before while - ",p)
+        #print("before while - ",p)
         while q_count < len(seed_set):
-            print("q_count - ",q_count, "  ", p)
+            #print("q_count - ",q_count, "  ", p)
             if seed_set[q_count][3] == -2: # if label(q) == Noise
-                print("===== EDIT 1 =====")
+                #print("===== EDIT 1 =====")
                 datapoint_2dlist[seed_set[q_count][0]][3] = prev_cluster_count
             if seed_set[q_count][3] != -1: # if label(q) != Undefined
                 q_count += 1
-                print("CONTINUE 3")
+                #print("CONTINUE 3")
                 continue
             neighbors1 = range_query(copy.deepcopy(datapoint_2dlist),seed_set[q_count],input_Eps)
-            print("===== EDIT 2 =====")
+            #print("===== EDIT 2 =====")
             datapoint_2dlist[seed_set[q_count][0]][3] = prev_cluster_count
             if len(neighbors1) < input_MinPts: # Core-point check
                 q_count += 1
-                print("CONTINUE 4")
+                #print("CONTINUE 4")
                 continue
             for i in neighbors1:
                 append = True
@@ -97,8 +97,6 @@ def clustering(datapoint_2dlist, input_Eps, input_MinPts):
                 if append == True:
                     seed_set.append(i)
             q_count += 1
-            print("q++")
-        print("p++")
 
     return datapoint_2dlist, prev_cluster_count
 
